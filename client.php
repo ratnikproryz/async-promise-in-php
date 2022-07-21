@@ -14,7 +14,7 @@ $urls = [
     'server.php?idx=3',
     'server.php?idx=4',
 ];
-
+echo "Star<br>";
 $promises = [];
 foreach ($urls as $url) {
     $promises[] = $client->getAsync($url)
@@ -28,7 +28,23 @@ foreach ($urls as $url) {
             }
         );
 }
+echo "End<br>";
+
 // Wait for the requests to complete; throws an exception
 $results = Utils::unwrap($promises);
 // Wait for the requests to complete, even if some of them fail
 // $results = Utils::settle($promises)->wait();
+
+$promise->then(
+    // The success callback
+    function (ResponseInterface $response) {
+        echo 'Successfully!';
+        // execute something…
+        return $response;
+    },
+    // The failure callback
+    function (\Exception $exception) {
+        echo 'Error!';
+        throw $exception;
+    }
+);

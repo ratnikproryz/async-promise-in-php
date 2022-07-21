@@ -4,7 +4,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 use GuzzleHttp\Client;
 
 $client = new Client;
-
 $urls = [
     'http://localhost/guzzle/server.php?idx=0',
     'http://localhost/guzzle/server.php?idx=1',
@@ -14,7 +13,6 @@ $urls = [
 ];
 
 $promises = [];
-
 foreach ($urls as $idx => $url) {
     $promises[] = $client->getAsync($url);
 }
